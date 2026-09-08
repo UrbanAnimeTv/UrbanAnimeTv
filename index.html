@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="UrbanAnimeTv — original urban anime, movies, series and entertainment.">
+  <title>UrbanAnimeTv</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="nav">
+    <a class="brand" href="#home" aria-label="UrbanAnimeTv home">
+      <span class="brandUrban">Urban</span><span class="brandAnime">Anime</span><span class="brandTv">Tv</span>
+    </a>
+
+    <nav class="desktopNav" aria-label="Primary navigation">
+      <a class="active" href="#home">Home</a>
+      <a href="#series">Series</a>
+      <a href="#movies">Movies</a>
+      <a href="#new">New Releases</a>
+    </nav>
+
+    <div class="navActions">
+      <button id="searchBtn" class="iconBtn" aria-label="Search">⌕</button>
+      <button class="profileBtn" onclick="showInfo('Profile')">Sign In</button>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="heroGlow"></div>
+      <div class="heroContent">
+        <div class="heroMeta">
+          <span class="pill">URBANANIMETV ORIGINAL</span>
+          <span class="dot"></span>
+          <span>SEASON 1</span>
+        </div>
+        <h1>HOOD<span>GODS</span></h1>
+        <p class="heroTagline">WHERE THE STREETS MEET ANIMATION.</p>
+        <p class="heroText">Street legends. Rival crews. Tournaments. Awakenings. Enter the world of HoodGods.</p>
+
+        <div class="heroButtons">
+          <button class="primary" data-play="videos/hoodgods-episode-1.mp4">▶ <span>Watch Now</span></button>
+          <button class="secondary" onclick="toggleMyList('HoodGods')">＋ <span id="listLabel">My List</span></button>
+        </div>
+
+        <div class="heroInfo">
+          <span>2026</span><span>•</span><span>Original Series</span><span>•</span><span>Action / Drama</span>
+        </div>
+      </div>
+      <div class="heroSideLabel">UA<span>01</span></div>
+    </section>
+
+    <section class="section" id="series">
+      <div class="sectionHead">
+        <div>
+          <p class="sectionKicker">URBANANIMETV ORIGINALS</p>
+          <h2>Featured Series</h2>
+        </div>
+        <a href="#series">View all <span>→</span></a>
+      </div>
+
+      <div class="cards">
+        <article class="card featuredCard">
+          <div class="poster hood">
+            <div class="posterOverlay"></div>
+            <div class="posterBrand">HG</div>
+            <div class="posterTitle">HOOD<br><span>GODS</span></div>
+            <div class="posterBottom">THE AWAKENING TOURNAMENT</div>
+          </div>
+          <div class="cardBody">
+            <div class="cardTopline"><span class="seriesBadge">ORIGINAL</span><span>SEASON 1</span></div>
+            <h3>HoodGods</h3>
+            <p>Street legends, rival crews and the power of Awakening.</p>
+            <button class="watch" data-play="videos/hoodgods-episode-1.mp4">Watch Episode 1</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="poster soon">
+            <span>COMING<br>SOON</span>
+          </div>
+          <div class="cardBody">
+            <div class="cardTopline"><span class="seriesBadge muted">ORIGINAL</span></div>
+            <h3>UrbanAnimeTv Original</h3>
+            <p>A new story is coming to the platform.</p>
+            <button class="watch" onclick="showInfo('UrbanAnimeTv Original')">Details</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="poster soon alt">
+            <span>COMING<br>SOON</span>
+          </div>
+          <div class="cardBody">
+            <div class="cardTopline"><span class="seriesBadge muted">MORE ORIGINALS</span></div>
+            <h3>More Originals</h3>
+            <p>Build the UrbanAnimeTv catalog one story at a time.</p>
+            <button class="watch" onclick="showInfo('More Originals')">Details</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="movies">
+      <div class="sectionHead">
+        <div>
+          <p class="sectionKicker">FEATURED FILMS</p>
+          <h2>Movies</h2>
+        </div>
+        <span class="catalogNote">YOUR CATALOG</span>
+      </div>
+      <div class="emptyPanel">
+        <div class="emptyIcon">▶</div>
+        <h3>Your movie catalog is coming.</h3>
+        <p>Original films will appear here as they are released.</p>
+      </div>
+    </section>
+
+    <section class="section" id="new">
+      <div class="sectionHead">
+        <div>
+          <p class="sectionKicker">LATEST ADDITIONS</p>
+          <h2>New Releases</h2>
+        </div>
+      </div>
+      <div class="releaseStrip">
+        <div class="releaseMark">UA</div>
+        <div>
+          <strong>HoodGods — Season 1</strong>
+          <p>Original urban anime • New episodes coming soon</p>
+        </div>
+        <span class="releaseArrow">→</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footerBrand">UrbanAnimeTv</div>
+    <p>Original urban anime, movies and entertainment.</p>
+    <small>© 2026 UrbanAnimeTv. All rights reserved.</small>
+  </footer>
+
+  <div id="player" class="player hidden">
+    <div class="playerTop">
+      <button id="closePlayer" aria-label="Close player">✕</button>
+      <b>UrbanAnimeTv</b>
+      <span>HoodGods</span>
+    </div>
+    <video id="video" controls playsinline></video>
+  </div>
+
+  <div id="modal" class="modal hidden">
+    <div class="modalBox">
+      <button class="close" onclick="closeModal()">✕</button>
+      <p class="sectionKicker">URBANANIMETV</p>
+      <h2 id="modalTitle"></h2>
+      <p id="modalText">This title is part of the UrbanAnimeTv catalog. More details will be added as the platform grows.</p>
+    </div>
+  </div>
+
+  <div id="searchPanel" class="search hidden">
+    <div class="searchTop">
+      <span>SEARCH</span>
+      <button onclick="closeSearch()">✕</button>
+    </div>
+    <input id="searchInput" placeholder="Search UrbanAnimeTv..." autocomplete="off">
+    <div id="results"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
