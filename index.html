@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<meta name="description" content="UrbanAnimeTv — original urban anime, series, movies and entertainment.">
+<title>UrbanAnimeTv</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#home" aria-label="UrbanAnimeTv home"><img src="urbananimetv-logo.png" alt="UrbanAnimeTv"></a>
+  <nav aria-label="Primary navigation">
+    <a class="nav-link active" data-nav="home" href="#home">Home</a>
+    <a class="nav-link" data-nav="series" href="#series">TV Shows</a>
+    <a class="nav-link" data-nav="movies" href="#movies">Movies</a>
+    <a class="nav-link" data-nav="my-list" href="#my-list">My List</a>
+    </nav>
+  <div class="top-actions">
+    <button id="searchBtn" class="top-icon search-icon" aria-label="Search">⌕</button>
+    <button id="accountBtn" class="top-icon account-icon" aria-label="Account"><span id="accountAvatarTop">●</span></button>
+  </div>
+</header>
+
+<main id="home">
+<section class="hero" id="heroCarousel" aria-label="Featured shows" tabindex="0">
+  <div class="hero-slide active" data-hero="HoodGods">
+    <div class="hero-art hero-art-hood" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <div class="hero-label">FEATURED</div>
+      <h1>HOODGODS</h1>
+      <div class="hero-tag">POWER. LOYALTY. SURVIVAL.</div>
+      <p>In a city ruled by violence, loyalty and power, HoodGods follows JetBlakk and his crew as they navigate the streets, awaken their true potential, and fight to take control.</p>
+      <div class="hero-buttons">
+        <button class="watch-btn hero-watch" data-hero-title="HoodGods"><span class="play-symbol" aria-hidden="true"></span><span>Watch Now</span></button>
+        <button class="list-btn hero-library" data-list-title="HoodGods">＋ <span>Add to Library</span></button>
+      </div>
+    </div>
+  </div>
+  <div class="hero-slide" data-hero="City of Ash">
+    <div class="hero-art hero-art-ash" aria-hidden="true"><div class="hero-ash-figure"></div><div class="hero-ash-title">CITY OF ASH</div></div>
+    <div class="hero-copy">
+      <div class="hero-label">FEATURED</div>
+      <h1>CITY OF ASH</h1>
+      <div class="hero-tag">ACTION. MYSTERY. SURVIVAL.</div>
+      <p>In a city buried in ash, survival means uncovering what happened before the past catches up with you.</p>
+      <div class="hero-buttons">
+        <button class="watch-btn hero-watch" data-hero-title="City of Ash"><span class="play-symbol" aria-hidden="true"></span><span>Watch Now</span></button>
+        <button class="list-btn hero-library" data-list-title="City of Ash">＋ <span>Add to Library</span></button>
+      </div>
+    </div>
+  </div>
+  <button class="hero-arrow hero-prev" id="heroPrev" aria-label="Previous featured show">‹</button>
+  <button class="hero-arrow hero-next" id="heroNext" aria-label="Next featured show">›</button>
+  <div class="hero-dots" aria-label="Featured show selection">
+    <button class="hero-dot active" data-hero-dot="0" aria-label="Show HoodGods"></button>
+    <button class="hero-dot" data-hero-dot="1" aria-label="Show City of Ash"></button>
+  </div>
+</section>
+
+<section class="row-section hidden" id="continue">
+  <div class="row-title"><h2>Continue Watching</h2><button data-see-all="continue">See All ›</button></div>
+  <div id="continueContent" class="poster-row continue-row"></div>
+</section>
+
+<section class="row-section home-section" id="series">
+  <div class="row-title"><h2>Popular on UrbanAnimeTv</h2><button data-see-all="popular">See All ›</button></div>
+  <div class="poster-row">
+    <article class="wide-card" data-title="HoodGods" data-type="series">
+      <div class="art hood-cast-art"><img src="hoodgods-thumbnail.png" alt="HoodGods"></div>
+      <h3>HoodGods</h3><p>1 Season&nbsp;&nbsp;|&nbsp;&nbsp; Action, Drama</p>
+    </article>
+    <article class="wide-card" data-title="City of Ash" data-type="series">
+      <div class="art ash-character-art"><div class="ash-silhouette" aria-hidden="true"></div><span>CITY OF ASH</span></div>
+      <h3>City of Ash</h3><p>1 Season&nbsp;&nbsp;|&nbsp;&nbsp; Action, Thriller</p>
+    </article>
+  </div>
+</section>
+
+<section class="row-section home-section" id="trending">
+  <div class="row-title"><h2>Trending Now</h2><button data-see-all="trending">See All ›</button></div>
+  <div class="poster-row">
+    <article class="wide-card" data-title="HoodGods" data-type="series">
+      <div class="art hood-trend-art"><img src="hoodgods-thumbnail.png" alt="HoodGods"></div>
+      <h3>HoodGods</h3>
+    </article>
+    <article class="wide-card" data-title="City of Ash" data-type="series">
+      <div class="art ash-trend-art"><div class="ash-silhouette" aria-hidden="true"></div><span>CITY OF ASH</span></div>
+      <h3>City of Ash</h3>
+    </article>
+  </div>
+</section>
+
+<section class="row-section hidden page-section" id="movies">
+  <div class="row-title"><h2>Movies</h2></div>
+  <div class="empty"><h3>Movies are coming soon</h3><p>UrbanAnimeTv original movies will appear here. Nothing new has been added yet.</p></div>
+</section>
+
+<section class="row-section hidden page-section" id="my-list">
+  <div class="row-title"><h2>Saved Library</h2><span class="section-subtitle">Your My List</span></div>
+  <div id="myListContent" class="library-grid"><div class="empty"><h3>Your library is empty</h3><p>Sign in and tap + My List on a show or movie to save it here.</p></div></div>
+</section>
+
+<section class="row-section hidden page-section" id="live-tv">
+  <div class="row-title"><h2>Live TV</h2><span class="live-badge"><i></i> LIVE</span></div>
+  <div class="live-panel">
+    <div class="live-heading"><div><h3>Now Streaming</h3><p>Live episodes will appear here when an existing UrbanAnimeTv episode is scheduled to stream.</p></div></div>
+    <div id="liveContent" class="live-grid">
+      <div class="empty live-empty"><h3>Nothing is streaming live right now</h3><p>There are no live episodes scheduled at the moment.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="row-section hidden page-section" id="watch-history">
+  <div class="row-title"><h2>Watch History</h2></div>
+  <div id="historyContent" class="library-grid"><div class="empty"><h3>No watch history yet</h3><p>Start watching and your history will appear here.</p></div></div>
+</section>
+
+<section class="row-section hidden page-section" id="account">
+  <div class="account-panel profile-panel">
+    <div class="profile-header">
+      <div class="profile-avatar-wrap"><img id="profileAvatar" class="profile-avatar" src="urbananimetv-logo.png" alt="Profile picture"><span class="online-dot"></span></div>
+      <div><div class="hero-label">ACCOUNT</div><h2 id="accountTitle">Sign In</h2><p id="accountStatus">Create a free UrbanAnimeTv account to save shows and keep your library private.</p></div>
+    </div>
+
+    <div id="authBox">
+      <form id="accountForm">
+        <input id="email" type="email" placeholder="Email" required autocomplete="email">
+        <input id="password" type="password" placeholder="Password" required minlength="6" autocomplete="current-password">
+        <div class="form-buttons">
+          <button class="watch-btn" type="submit" id="accountSubmit">Sign In</button>
+          <button class="list-btn" type="button" id="signupToggle">Create Account</button>
+        </div>
+        <p id="accountMessage" class="account-message" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <div id="profileSettings" class="profile-settings hidden">
+      <div class="settings-heading"><h3>Profile Settings</h3><span>Customize your profile</span></div>
+      <label class="upload-box" for="avatarInput">
+        <img id="profilePreview" src="urbananimetv-logo.png" alt="">
+        <span><strong>Change Profile Picture</strong><small>Choose a custom JPG, PNG or WEBP image</small></span>
+        <input id="avatarInput" type="file" accept="image/png,image/jpeg,image/webp">
+      </label>
+      <div class="profile-name-row">
+        <input id="displayName" type="text" maxlength="40" placeholder="Display name">
+        <button id="saveProfile" class="watch-btn" type="button">Save Profile</button>
+      </div>
+      <div class="profile-actions">
+        <button class="list-btn" type="button" id="historyBtn">Watch History</button>
+        <button class="list-btn danger-btn" type="button" id="signOut">Sign Out</button>
+      </div>
+      <p id="profileMessage" class="account-message" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<nav class="bottom-nav" aria-label="Mobile navigation">
+  <a href="#home" data-bottom-nav="home"><span>⌂</span><small>Home</small></a>
+  <a href="#series" data-bottom-nav="series"><span>▣</span><small>TV Shows</small></a>
+  <a href="#movies" data-bottom-nav="movies"><span>▤</span><small>Movies</small></a>
+  <a href="#live-tv" data-bottom-nav="live-tv"><span>●</span><small>Live TV</small></a>
+  <a href="#my-list" data-bottom-nav="my-list"><span>♡</span><small>Library</small></a>
+</nav>
+
+<div id="player" class="overlay hidden" role="dialog" aria-modal="true" aria-label="Video player">
+  <div class="player-top"><button id="closePlayer" aria-label="Close">✕</button><strong id="playerTitle">HoodGods</strong></div>
+  <div class="player-body"><div class="player-placeholder"><div>▶</div><h2 id="playerHeading">HoodGods — S1 E1 · The Beginning</h2><p>Your video player will go here when video hosting is connected.</p></div></div>
+</div>
+
+<div id="modal" class="overlay hidden" role="dialog" aria-modal="true">
+  <div class="shade" data-close></div>
+  <div class="modal-card">
+    <button class="modal-x" data-close aria-label="Close">✕</button>
+    <div class="modal-art"><img id="modalArt" src="hoodgods-thumbnail.png" alt=""></div>
+    <div class="hero-label">URBANANIMETV ORIGINAL</div>
+    <h2 id="modalTitle">HoodGods</h2>
+    <p id="modalText"></p>
+    <div class="form-buttons"><button class="watch-btn" id="modalWatch"><span class="play-symbol" aria-hidden="true"></span><span>Watch Now</span></button></div>
+    <div class="rating-box" aria-label="Rate this show">
+      <div class="rating-label"><strong>Rate this show</strong><span id="ratingStatus">Sign in to rate</span></div>
+      <div class="rating-buttons">
+        <button class="rating-btn" id="thumbUp" data-rating="up" aria-label="Thumbs up"><span class="thumb-icon thumb-up" aria-hidden="true">♜</span><span>Like</span></button>
+        <button class="rating-btn" id="thumbDown" data-rating="down" aria-label="Thumbs down"><span class="thumb-icon thumb-down" aria-hidden="true">♜</span><span>Dislike</span></button>
+      </div>
+    </div>
+    <div class="season-block">
+      <div class="season-heading"><h3>Seasons & Episodes</h3><label><span class="sr-only">Season</span><select id="seasonSelect" aria-label="Select season"></select></label></div>
+      <div id="episodeList" class="episode-list"></div>
+    </div>
+  </div>
+</div>
+
+<div id="search" class="overlay hidden" role="dialog" aria-modal="true" aria-label="Search">
+  <div class="shade" id="closeSearch"></div>
+  <div class="search-card">
+    <div class="search-line"><input id="searchInput" placeholder="Search UrbanAnimeTv" autocomplete="off"><button id="searchX" aria-label="Close search">✕</button></div>
+    <div id="results"></div>
+  </div>
+</div>
+
+<footer>
+  <img src="urbananimetv-logo.png" alt="UrbanAnimeTv">
+  <div class="footer-links"><a href="#home">About</a><a href="#home">Help</a><a href="#home">Privacy</a><a href="#home">Terms</a><a href="#home">Contact</a></div>
+  <div class="social" aria-label="Social links">◉　◎　♪　♥</div>
+  <p>© 2026 UrbanAnimeTv. All rights reserved.</p>
+  <small>Anime. Culture. The streets live here.</small>
+</footer>
+<script src="config.js"></script>
+<script type="module" src="app.js"></script>
+
+<button class="notify-btn" id="modalNotify" type="button" aria-label="Get notifications for this show" title="Get notifications">
+  <span class="notify-icon" aria-hidden="true">♧</span>
+  <span class="notify-label">Notify Me</span>
+</button>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
