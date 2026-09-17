@@ -411,3 +411,65 @@ body.drawer-open{overflow:hidden}
   .modal-actions .watch-btn,.modal-actions .list-btn{width:100%}
   .modal-actions .modal-notify{width:100%;grid-column:1/-1}
 }
+
+/* UATV PLAYER FIX — override legacy .player-placeholder div rule */
+.player-placeholder .player-screen{
+  width:min(760px,92vw) !important;
+  height:auto !important;
+  aspect-ratio:16/9 !important;
+  display:block !important;
+  position:relative !important;
+  margin:0 auto !important;
+  border-radius:12px !important;
+  overflow:hidden !important;
+  background:#090909 !important;
+}
+.player-placeholder .player-gradient{
+  position:absolute !important;
+  inset:0 !important;
+  width:auto !important;
+  height:auto !important;
+  margin:0 !important;
+  border-radius:0 !important;
+  display:block !important;
+  background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.18) 45%,rgba(0,0,0,.78)) !important;
+}
+.player-placeholder .player-art{
+  width:100% !important;
+  height:100% !important;
+  max-width:none !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  aspect-ratio:auto !important;
+}
+.player-placeholder .player-play-button{
+  width:170px !important;
+  height:52px !important;
+  border-radius:7px !important;
+  background:rgba(12,12,12,.92) !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  margin:0 !important;
+  font-size:12px !important;
+}
+.player-placeholder .player-play-button::after{content:"PLAY EPISODE" !important;}
+.player-placeholder .player-meta{
+  width:min(760px,92vw) !important;
+  height:auto !important;
+  min-height:0 !important;
+  margin:18px auto 0 !important;
+  padding:0 !important;
+  display:block !important;
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  color:inherit !important;
+  text-align:left !important;
+}
+@media(max-width:600px){
+  .player-placeholder .player-screen{width:94vw !important;border-radius:9px !important;}
+  .player-placeholder .player-play-button{width:150px !important;height:50px !important;}
+  .player-placeholder .player-meta{width:94vw !important;}
+}
