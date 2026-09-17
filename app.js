@@ -68,8 +68,7 @@ const SHOWS = {
     image:"black-dynamite-thumbnail.jpg",
     seasons:[{number:1,episodes:[
       {number:1,title:"Episode 1",description:"Black Dynamite Season 1 Episode 1.",video:`${VIDEO_BASE}/Black%20Dynamite/black.dynamite.s01e01.1080p.bluray.x264-rovers.mkv`},
-      {number:2,title:"Episode 2",description:"Black Dynamite Season 1 Episode 2.",video:`${VIDEO_BASE}/Black%20Dynamite/black.dynamite.s01e02.1080p.bluray.x264-rovers.mkv`},
-      {number:3,title:"Episode 3",description:"Black Dynamite Season 1 Episode 3.",video:`${VIDEO_BASE}/Black%20Dynamite/black.dynamite.s01e03.1080p.bluray.x264-rovers.mkv`}
+      {number:2,title:"Episode 2",description:"Black Dynamite Season 1 Episode 2.",video:`${VIDEO_BASE}/Black%20Dynamite/black.dynamite.s01e02.1080p.bluray.x264-rovers.mkv`}
     ]}]
   },
   "The Cleveland Show": {
@@ -90,8 +89,7 @@ const SHOWS = {
       {number:3,title:"Episode 3",description:"Just Jordan Season 1 Episode 3.",video:`${VIDEO_BASE}/Just%20Jordan/Just.Jordan.S01E03.360p.mp4`},
       {number:4,title:"Episode 4",description:"Just Jordan Season 1 Episode 4.",video:`${VIDEO_BASE}/Just%20Jordan/Just.Jordan.S01E04.360p.mp4`},
       {number:5,title:"Episode 5",description:"Just Jordan Season 1 Episode 5.",video:`${VIDEO_BASE}/Just%20Jordan/Just.Jordan.S01E05.360p.mp4`},
-      {number:6,title:"Episode 6",description:"Just Jordan Season 1 Episode 6.",video:`${VIDEO_BASE}/Just%20Jordan/Just.Jordan.S01E06.360p.mp4`},
-      {number:7,title:"Episode 7",description:"Just Jordan Season 1 Episode 7.",video:`${VIDEO_BASE}/Just%20Jordan/Just.Jordan.S01E07.360p.mp4`}
+      {number:6,title:"Episode 6",description:"Just Jordan Season 1 Episode 6.",video:`${VIDEO_BASE}/Just%20Jordan/Just.Jordan.S01E06.360p.mp4`}
     ]}]
   },
   "Aqua Teen Hunger Force": {
@@ -303,11 +301,7 @@ function play(title="HoodGods",episode=1,season=1){
   $("#playerTitle").textContent=label;
   $("#playerHeading").textContent=label;
 
-  const playerArt=$("#playerArt");
-  if(playerArt){playerArt.src=show.image||"hoodgods-thumbnail.png";playerArt.alt=title;}
-
   const video=$("#playerVideo");
-  const placeholder=$("#playerPlaceholder");
   const playerNote=$("#playerNote");
 
   if(video){
@@ -317,11 +311,9 @@ function play(title="HoodGods",episode=1,season=1){
     if(ep?.video){
       video.src=ep.video;
       video.classList.remove("hidden");
-      placeholder?.classList.add("video-active");
       if(playerNote)playerNote.textContent="Premium playback";
     }else{
       video.classList.add("hidden");
-      placeholder?.classList.remove("video-active");
       if(playerNote)playerNote.textContent="Episode playback will start here when video hosting is connected.";
     }
   }
@@ -1094,12 +1086,6 @@ async function init(){
   $("#avatarInput").onchange=e=>uploadAvatar(e.target.files?.[0]);
   $("#leaveWatchParty").onclick=async()=>{await leaveWatchParty();showSection("live-tv");};
   $("#closePlayer").onclick=e=>{e.stopPropagation();closePlayer();};
-  $("#playerPlayButton").onclick=e=>{
-    e.stopPropagation();
-    const video=$("#playerVideo");
-    if(video && !video.classList.contains("hidden") && video.src){video.play().catch(()=>{});}
-    else showToast("This episode does not have a connected video source yet.","error");
-  };
   $("#modalWatch").onclick=e=>{e.stopPropagation();
     const show=SHOWS[activeTitle]||SHOWS.HoodGods;
     $("#modal").classList.add("hidden");
@@ -1191,9 +1177,6 @@ document.addEventListener("click",e=>{
 
   const libraryButton=target.closest("[data-list-title]");
   if(libraryButton){e.preventDefault();if(libraryButton.disabled)return;toggleList(libraryButton.dataset.listTitle);return;}
-
-  const playerPlay=target.closest("#playerPlayButton");
-  if(playerPlay){e.preventDefault();const video=$("#playerVideo");if(video && !video.classList.contains("hidden") && video.src)video.play().catch(()=>{});else showToast("This episode does not have a connected video source yet.","error");return;}
 
   const modalWatch=target.closest("#modalWatch");
   if(modalWatch){e.preventDefault();const title=modalWatch.dataset.title||activeTitle;$("#modal")?.classList.add("hidden");const show=SHOWS[title]||SHOWS.HoodGods;if(show.live){showSection("live-tv");setTimeout(()=>openWatchParty(title),60);}else play(title,1,1);return;}
