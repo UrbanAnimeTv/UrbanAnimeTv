@@ -15,7 +15,7 @@ let profile = {display_name:"", avatar_url:""};
 let membership = {plan:"free", status:"active"};
 let activeProfile = {id:"default",name:"Main",type:"adult",pinHash:""};
 let profileList = [];
-const KIDS_SHOWS = new Set(["Just Jordan"]);
+const KIDS_SHOWS = new Set(["Just Jordan"]); const KIDS_PLUS_SHOWS = new Set(["The Proud Family","Static Shock"]);
 
 const VIDEO_BASE = "https://uatv-video.urbananimetv10.workers.dev";
 
@@ -66,9 +66,15 @@ const SHOWS = {
     ]}]
   },
   "Static Shock": {
-    type:"series", premium:true, live:true, channel:true,
+    type:"series", premium:true, live:true, channel:true, kid:true,
     description:"Static Shock — a young hero balancing power, responsibility and life in the city.",
     image:"static-shock-thumbnail.jpg",
+    seasons:[{number:1,episodes:[]}]
+  },
+  "The Proud Family": {
+    type:"series", premium:true, live:true, channel:true,
+    description:"The Proud Family — family, friendship and everyday adventures.",
+    image:"proud-family-thumbnail.jpg",
     seasons:[{number:1,episodes:[]}]
   },
   "Black Dynamite": {
@@ -1055,6 +1061,107 @@ function renderAdultCatalog(){
   }).join("");
 }
 
+function ensureKidsPlusStyles(){
+  if($("#kidsPlusStyles"))return;
+  const style=document.createElement("style");
+  style.id="kidsPlusStyles";
+  style.textContent=`
+    #kidsPlusCarousel{margin:24px 0}
+    #kidsPlusCarousel .section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+    #kidsPlusCarousel .section-head h2{margin:4px 0 0}
+    #kidsPlusCarousel .kids-plus-controls{display:flex;gap:8px}
+    #kidsPlusCarousel .kids-plus-slide{overflow:hidden}
+    #kidsPlusCarousel .kids-plus-card{display:grid;grid-template-columns:minmax(180px,34%) 1fr;min-height:220px;border-radius:18px;overflow:hidden;cursor:pointer;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
+    #kidsPlusCarousel .kids-plus-art{position:relative;min-height:220px;background:linear-gradient(135deg,#111,#292929);display:flex;align-items:center;justify-content:center}
+    #kidsPlusCarousel .kids-plus-art img{width:100%;height:100%;object-fit:cover;display:block}
+    #kidsPlusCarousel .kids-plus-fallback{display:none;position:absolute;padding:20px;text-align:center;font-weight:800;font-size:24px}
+    #kidsPlusCarousel .kids-plus-art.no-art .kids-plus-fallback{display:block}
+    #kidsPlusCarousel .kids-plus-copy{padding:28px;display:flex;flex-direction:column;justify-content:center}
+    #kidsPlusCarousel .kids-plus-copy h3{font-size:28px;margin:8px 0}
+    #kidsPlusCarousel .kids-plus-copy p{opacity:.8;margin:0 0 18px}
+    #kidsPlusCarousel .kids-plus-watch{width:max-content}
+    @media(max-width:650px){
+      #kidsPlusCarousel .kids-plus-card{grid-template-columns:1fr;min-height:0}
+      #kidsPlusCarousel .kids-plus-art{height:190px;min-height:190px}
+      #kidsPlusCarousel .kids-plus-copy{padding:20px}
+      #kidsPlusCarousel .kids-plus-copy h3{font-size:23px}
+    }`;
+  document.head.appendChild(style);
+}
+
+function renderKidsPlusCarousel(){
+  ensureKidsPlusStyles();
+  const kidsSection=$("#kids-section");
+  if(!kidsSection)return;
+  let wrap=$("#kidsPlusCarousel");
+  if(!wrap){
+    wrap=document.createElement("section");
+    wrap.id="kidsPlusCarousel";
+    wrap.className="kids-plus-section";
+    wrap.innerHTML=`
+      <div class="section-head">
+        <div>
+          <span class="kids-kicker">UATV KIDS+</span>
+          <h2>Kids+ Picks</h2>
+        </div>
+        <div class="kids-plus-controls">
+          <button type="button" class="list-btn" id="kidsPlusPrev" aria-label="Previous Kids+ show">‹</button>
+          <button type="button" class="list-btn" id="kidsPlusNext" aria-label="Next Kids+ show">›</button>
+        </div>
+      </div>
+      <div id="kidsPlusSlide" class="kids-plus-slide"></div>`;
+    const featured=kidsSection.querySelector("#kidsHomeFeatured");
+    if(featured && featured.parentElement) featured.parentElement.insertBefore(wrap,featured.nextSibling);
+    else kidsSection.prepend(wrap);
+  }
+
+  const titles=[...KIDS_PLUS_SHOWS].filter(t=>SHOWS[t]);
+  const slide=$("#kidsPlusSlide");
+  if(!slide || !titles.length){if(wrap)wrap.classList.add("hidden");return;}
+  wrap.classList.remove("hidden");
+
+  let index=Number(wrap.dataset.index||0);
+  if(index>=titles.length)index=0;
+
+  const render=()=>{
+    const title=titles[index];
+    const show=SHOWS[title];
+    const episodeCount=(show.seasons||[]).reduce((total,season)=>total+(season.episodes||[]).length,0);
+    slide.innerHTML=`
+      <article class="kids-plus-card" data-title="${safe(title)}">
+        <div class="kids-plus-art">
+          <img src="${show.image}" alt="${safe(title)}" onerror="this.style.display='none';this.parentElement.classList.add('no-art')">
+          <div class="kids-plus-fallback">${safe(title)}</div>
+        </div>
+        <div class="kids-plus-copy">
+          <span class="kids-kicker">UATV KIDS+</span>
+          <h3>${safe(title)}</h3>
+          <p>${episodeCount ? `${episodeCount} episodes` : "Coming soon"}${show.live ? " • Live TV" : ""}</p>
+          <button type="button" class="watch-btn kids-plus-watch">View Show</button>
+        </div>
+      </article>`;
+    slide.querySelector(".kids-plus-card")?.addEventListener("click",()=>openDetails(title));
+    slide.querySelector(".kids-plus-watch")?.addEventListener("click",e=>{e.stopPropagation();openDetails(title);});
+    wrap.dataset.index=String(index);
+  };
+
+  const move=delta=>{
+    index=(index+delta+titles.length)%titles.length;
+    render();
+  };
+
+  $("#kidsPlusPrev")?.replaceWith($("#kidsPlusPrev")?.cloneNode(true));
+  $("#kidsPlusNext")?.replaceWith($("#kidsPlusNext")?.cloneNode(true));
+  $("#kidsPlusPrev")?.addEventListener("click",e=>{e.stopPropagation();move(-1);});
+  $("#kidsPlusNext")?.addEventListener("click",e=>{e.stopPropagation();move(1);});
+
+  if(wrap._uatvKidsPlusTimer)clearInterval(wrap._uatvKidsPlusTimer);
+  render();
+  if(titles.length>1){
+    wrap._uatvKidsPlusTimer=setInterval(()=>move(1),6000);
+  }
+}
+
 function renderKidsSection(){
   const kidTitles=Object.keys(SHOWS).filter(t=>isKidsAllowed(t));
   const featured=$("#kidsHomeFeatured");
@@ -1073,6 +1180,7 @@ function renderKidsSection(){
   if(live)live.innerHTML=liveTitles.length?liveTitles.map(t=>`<article class="wide-card kids-card" data-title="${safe(t)}"><div class="art"><img src="${SHOWS[t].image}" alt="${safe(t)}"></div><h3>${safe(t)}</h3><p>Kids Live TV</p><button class="watch-btn kids-live-watch" data-kids-live="${safe(t)}" type="button"><span class="play-symbol" aria-hidden="true"></span><span>Watch Live</span></button><button class="list-btn kids-live-party" data-kids-party="${safe(t)}" type="button">Watch Party</button></article>`).join(""): `<div class="kids-empty"><h3>No kids live shows yet</h3><p>Kids live channels you add later will appear here.</p></div>`;
   $$(".kids-live-watch").forEach(b=>b.onclick=e=>{e.stopPropagation();openWatchParty(b.dataset.kidsLive);});
   $$(".kids-live-party").forEach(b=>b.onclick=e=>{e.stopPropagation();openWatchParty(b.dataset.kidsParty);});
+  renderKidsPlusCarousel();
   renderKidsSeries();
 }
 function renderKidsSeries(){
